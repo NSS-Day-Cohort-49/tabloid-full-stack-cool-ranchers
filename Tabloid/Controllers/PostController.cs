@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using Tabloid.Models;
 using Tabloid.Repositories;
 namespace Tabloid.Controllers
@@ -18,7 +19,9 @@ namespace Tabloid.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_postRepository.GetAll());
+            var posts = _postRepository.GetAll();
+            var filteredPosts = posts.Where(post => post.PublishDateTime < DateTime.Now);
+            return Ok(filteredPosts);
         }
     }
 }
