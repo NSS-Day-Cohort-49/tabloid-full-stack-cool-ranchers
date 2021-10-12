@@ -82,14 +82,14 @@ namespace Tabloid.Repositories
                 }
 
             };
-            //if (!reader.IsDBNull(reader.GetOrdinal("CategoryId")))
-            //{
-            //    post.Category = new Category()
-            //    {
-            //        Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-            //        Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-            //    };
-            //}
+            if (!reader.IsDBNull(reader.GetOrdinal("CategoryId")))
+            {
+                post.Category = new Category()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                };
+            }
             return post;
         }
     }
