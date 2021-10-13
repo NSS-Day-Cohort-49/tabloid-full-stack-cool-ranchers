@@ -6,7 +6,9 @@ const Post = ({ post }) => {
   return (
     <Card >
       <CardBody>
-        <h3>{post.title}</h3>
+        <Link to={`/post/${post.id}`}>
+              <h3>{post.title}</h3>
+        </Link> 
       </CardBody>
       <CardBody>
         <p>Author: {post.userProfile.displayName}</p>
