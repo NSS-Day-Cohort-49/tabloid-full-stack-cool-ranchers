@@ -46,6 +46,12 @@ namespace Tabloid.Controllers
             return Ok(myPosts);
         }
 
-
+        //https://localhost:5001/api/post/id
+        [HttpGet("{id}")]
+        public IActionResult GetPostById(int id)
+        {
+            var post = _postRepository.GetPostById(id);
+            return Ok(post);
+        }
     }
 }
