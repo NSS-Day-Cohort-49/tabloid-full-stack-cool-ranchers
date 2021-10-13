@@ -22,7 +22,7 @@ const PostList = () => {
     <div>
         <br/>
         <div className="container">
-            <div className="row justify-content-center">
+            <div className="container justify-content-center">
                 {console.log(posts)}
                 {posts.map((post) => (
                     <Post post={post} key={post.id} />
