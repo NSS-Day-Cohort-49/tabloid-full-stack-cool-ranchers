@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Card, CardBody, ListGroup, ListGroupItem } from "reactstrap";
 import { getPostById } from "../../modules/postManager";
+import CommentList from "../Comment/CommentList";
 
 const PostDetail = () => {
   
   const [post, setPost] = useState({});
   const {id} = useParams();
+  // const {postId} = useParams();
+
+  const history = useHistory();
 
   useEffect(() => {
     getPostById(id).then(setPost);
@@ -15,6 +19,7 @@ const PostDetail = () => {
   // if (!post) {
   //   return null;
   // }
+
   
   return (
     <ListGroup >
@@ -34,6 +39,9 @@ const PostDetail = () => {
       <ListGroupItem>
         <p>{post.content}</p>
       </ListGroupItem>
+      <button onClick={() => {history.push(`/post/${id}/comments`)}}>View Comments</button>
+      <Link to={`/post/${id}/comments`}>View Comments</Link>
+      {/* <CommentList /> */}
     </ListGroup>
   );
 };
