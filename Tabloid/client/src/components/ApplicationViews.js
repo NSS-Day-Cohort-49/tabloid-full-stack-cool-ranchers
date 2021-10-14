@@ -5,7 +5,7 @@ import Register from "./Register";
 import PostList from "./Post/PostList";
 import UserPostList from "./Post/UserPostList";
 import PostDetail from "./Post/PostDetail";
-import { PostForm } from "./Posts/PostForm";
+import { PostForm } from "./Post/PostForm";
 import TagList from "./Tag/TagList";
 
 export default function ApplicationViews({ isLoggedIn }) {
