@@ -52,3 +52,22 @@ export const getPostById = (id) => {
     });
   });
 };
+
+export const addPost = (post) => {
+  return getToken().then((token) => {
+    return fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error("An unknown error occurred while trying to add a post.");
+      }
+    });
+  });
+};
+
+
