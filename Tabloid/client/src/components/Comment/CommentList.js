@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Comment from './Comment';
 import { getCommentsFromPost} from "../../modules/commentManager";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import { Button } from "reactstrap";
 
 const CommentList = () => {
     // Array destructuring initializes variables and useState() hook returns an array of 2 things: the initial value of the state variable
@@ -9,6 +10,7 @@ const CommentList = () => {
   const [comments, setComments] = useState([]);
 
   const {id} = useParams();
+  const history = useHistory();
 
   const getPostComments = (id) => {
     getCommentsFromPost(id).then(comments => setComments(comments));
@@ -33,6 +35,8 @@ const CommentList = () => {
                     <p>No Comments Yet</p>
                 }
             </div>
+            <br/>
+            <Button onClick={() => {history.push(`/post/${id}`)}}>Return to Post</Button>
         </div>
     </div>
   );
