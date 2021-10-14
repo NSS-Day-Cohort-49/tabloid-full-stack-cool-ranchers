@@ -133,6 +133,48 @@ namespace Tabloid.Repositories
             }
         }
 
+
+
+
+        public void AddPost(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       INSERT INTO Post (
+                              Title, Content, 
+                              ImageLocation,
+                              CreateDateTime, PublishDateTime, IsApproved,
+                              CategoryId, UserProfileId)
+                    OUTPUT INSERTED.ID VALUES (@title, @content, @imageLocation, @createDateTime, @publishDateTime, @IsApproved, 
+                    @categoryId, @userProfileId)
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@title", post.Title );
+                    DbUtils.AddParameter(cmd, "@content", post.Content);
+                    DbUtils.AddParameter(cmd, "@imageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
+                    DbUtils.AddParameter(cmd, "@createDateTime", post.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@publishDateTime", DbUtils.ValueOrDBNull(post.PublishDateTime));
+                    DbUtils.AddParameter(cmd, "@isApproved", post.IsApproved);
+                    DbUtils.AddParameter(cmd, "@categoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@userProfileId", post.UserProfileId);
+
+                    post.Id = (int)cmd.ExecuteScalar();
+  
+                }
+            }
+        }
+
+
+
+
+
+
+
+
         private Post NewPostFromReader(SqlDataReader reader)
         {
             Post post = new Post()

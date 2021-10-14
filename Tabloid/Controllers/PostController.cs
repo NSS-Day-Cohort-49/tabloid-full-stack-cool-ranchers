@@ -35,6 +35,15 @@ namespace Tabloid.Controllers
 
 
 
+        [HttpPost]
+        public IActionResult Post(Post post)
+        {
+            _postRepository.AddPost(post);
+            return CreatedAtAction("Get", new { id = post.Id }, post);
+        }
+
+
+
 
         //https://localhost:5001/api/post/myPosts
         [HttpGet("myPosts")]
