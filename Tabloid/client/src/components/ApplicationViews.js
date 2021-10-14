@@ -7,6 +7,7 @@ import UserPostList from "./Post/UserPostList";
 import PostDetail from "./Post/PostDetail";
 import CommentList from "./Comment/CommentList";
 import TagList from "./Tag/TagList";
+import CategoryList from "./Category/CategoryList";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -20,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/myPosts">
           {isLoggedIn ? <UserPostList /> : <Redirect to="/login" />}
         </Route>
-        
+
         <Route path="/post/:id" exact>
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
@@ -28,6 +29,11 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/post/:id/comments">
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
+
+        <Route path="/categories">
+          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/tags">
           {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
         </Route>
