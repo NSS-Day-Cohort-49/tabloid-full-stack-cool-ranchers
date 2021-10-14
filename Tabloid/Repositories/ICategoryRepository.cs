@@ -1,6 +1,11 @@
-﻿namespace Tabloid.Repositories
+﻿using System.Collections.Generic;
+using Tabloid.Models;
+
+namespace Tabloid.Repositories
 {
-    internal interface ICategoryRepository
+    public interface ICategoryRepository
     {
+        List<Category> GetAll();
+        public Category GetCategoryById(int id);
     }
 }
