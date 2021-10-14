@@ -11,5 +11,7 @@ namespace Tabloid.Repositories
         List<Post> GetAll();
         List<Post> GetPostByCurrentUser(int currentUserId);
         Post GetPostById(int id);
+
+        void AddPost(Post post);
     }
 }
