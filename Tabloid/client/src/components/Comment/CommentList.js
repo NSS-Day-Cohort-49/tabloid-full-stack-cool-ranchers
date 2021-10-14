@@ -12,6 +12,7 @@ const CommentList = () => {
 
   const getPostComments = (id) => {
     getCommentsFromPost(id).then(comments => setComments(comments));
+    // getCommentsFromPost(id).then(data => console.log(data));
   };
 
   useEffect(() => {
@@ -25,9 +26,12 @@ const CommentList = () => {
             <h1>Post Comments:</h1>
             <div className="container justify-content-center">
                 {console.log(comments)}
-                {comments.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
-                ))}
+                {comments.length !== 0 ?
+                comments.map((comment) => {
+                    return <Comment comment={comment} key={comment.id} />})
+                    :
+                    <p>No Comments Yet</p>
+                }
             </div>
         </div>
     </div>

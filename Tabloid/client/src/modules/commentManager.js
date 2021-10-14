@@ -20,8 +20,9 @@ export const getAllComments = () => {
 };
 
 export const getCommentsFromPost = (id) => {
+    console.log("triggering?")
     return getToken().then((token) => {
-      return fetch(`${commentUrl}/${id}`, {
+      return fetch(`${commentUrl}/postComments/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
