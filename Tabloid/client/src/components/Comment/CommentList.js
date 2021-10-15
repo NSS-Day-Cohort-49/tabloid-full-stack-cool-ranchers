@@ -25,7 +25,10 @@ const CommentList = () => {
   return (
     <div>
         <div className="container">
-            <h1>Post Comments:</h1>
+            <h1 className="commentHeader">Post Comment(s):</h1><br/>
+            {/* {comments.map((comment) => {
+                    return <h2>Post Title: {comment.post.title}</h2>})
+            }<br/> */}
             <div className="container justify-content-center">
                 {console.log(comments)}
                 {comments.length !== 0 ?

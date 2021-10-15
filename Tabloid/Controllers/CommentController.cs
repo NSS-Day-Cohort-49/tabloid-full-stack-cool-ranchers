@@ -49,16 +49,22 @@ namespace Tabloid.Controllers
             return id;
         }
 
+        //private int GetCurrentUserProfileId()
+        //{
+        //    string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    return int.Parse(id);
+        //}
+
         //https://localhost:5001/api/comment
         [HttpPost]
         public IActionResult Post(Comment comment)
         {
             try
             {
-                //string fireBaseId = GetCurrentUserProfileId();
-                //var currentUser = _userProfileRepository.GetByFirebaseUserId(fireBaseId);
-                //comment.UserProfileId = currentUser.Id;
-
+                string fireBaseId = GetCurrentUserProfileId();
+                var currentUser = _userProfileRepository.GetByFirebaseUserId(fireBaseId);
+                comment.UserProfileId = currentUser.Id;
+                
                 comment.CreateDateTime = DateTime.Now;
 
                 _commentRepository.CreateComment(comment);
