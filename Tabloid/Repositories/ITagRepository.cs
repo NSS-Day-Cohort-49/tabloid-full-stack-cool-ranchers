@@ -6,8 +6,8 @@ namespace Tabloid.Repositories
     public interface ITagRepository
     {
         List<Tag> GetAllTags();
+        void AddTag(Tag tag);
         //Tag GetTagById(int id);
-        //void Add(Tag tag);
         //void DeleteTag(int id);
         //void UpdateTag(Tag tag);
         //List<Tag> GetTagsByPost(int postId);
