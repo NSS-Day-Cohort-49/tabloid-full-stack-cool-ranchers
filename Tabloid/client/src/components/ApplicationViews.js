@@ -21,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/myPosts">
+        <Route path="/myPosts" exact>
           {isLoggedIn ? <UserPostList /> : <Redirect to="/login" />}
         </Route>
 
@@ -29,11 +29,11 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/post">
+        <Route path="/post" exact>
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
-          
-        <Route path="/post/:id/comments">
+
+        <Route path="/post/:id/comments" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
 
         </Route>
