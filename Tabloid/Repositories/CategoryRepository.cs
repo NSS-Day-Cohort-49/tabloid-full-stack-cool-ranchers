@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Models;
 using Microsoft.Data.SqlClient;
+using Tabloid.Utils;
 
 namespace Tabloid.Repositories
 {
@@ -29,7 +30,11 @@ namespace Tabloid.Repositories
 
                     while (reader.Read())
                     {
-                        categories.Add(newCategory(reader));
+                        categories.Add(new Category()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                        });
                     }
 
                     reader.Close();
@@ -70,11 +75,6 @@ namespace Tabloid.Repositories
                     return category;
                 }
             }
-        }
-
-        private Category newCategory(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
         }
     }
 }
