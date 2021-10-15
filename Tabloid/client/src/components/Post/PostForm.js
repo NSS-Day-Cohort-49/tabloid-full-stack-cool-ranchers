@@ -53,8 +53,9 @@ export const PostForm = () => {
 
     const handleSave = (event) => {
         event.preventDefault()
-        addPost(post).then(() => history.push(`/myPosts`))
+        addPost(post).then((res) => history.push(`/post/${res.id}`))
     }
+
 
     console.log("post id", post.id);
 
