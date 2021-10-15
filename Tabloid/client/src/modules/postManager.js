@@ -54,19 +54,26 @@ export const getPostById = (id) => {
 };
 
 export const addPost = (post) => {
+  console.log('post', post);
   return getToken().then((token) => {
     return fetch(baseUrl, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
-      }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error("An unknown error occurred while trying to add a post.");
-      }
-    });
+      },
+      body: JSON.stringify(post)
+    }).catch((e) => {
+      console.error("ERROR: ", e);
+    }) 
+    
+    // .then((res) => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   } else {
+    //     throw new Error("An unknown error occurred while trying to add a post.");
+    //   }
+    // });
   });
 };
 

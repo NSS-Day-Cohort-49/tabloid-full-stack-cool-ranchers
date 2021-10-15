@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Input, Form, Label, Button } from "reactstrap";
 import { addPost } from "../../modules/postManager";
 import { FormGroup } from "reactstrap";
-import { getAllCategories } from "../../modules/categoryManager";
+// import { getAllCategories } from "../../modules/categoryManager";
 
 export const PostForm = () => {
     const [post, setPost] = useState({
@@ -18,24 +18,25 @@ export const PostForm = () => {
     })
     const [categories, setCategories] = useState([])
     useEffect(() => {
-        getAllCategories().then(setCategories)
-
+        // getAllCategories().then(setCategories)
     }, [])
 
     const handleInputChange = (event) => {
+        // This is needed because a form will always refresh your page when a button is clicked.
         event.preventDefault()
         const value = event.target.value
         const key = event.target.id
+        // I am creating a copy of the empy post state that then gets modified with the users input.
         const postCopy = {...post}
         postCopy[key] = value
         setPost({
             title: postCopy.title,
             content: postCopy.content,
             imageLocation: postCopy.imageLocation,
-            createDateTime: postCopy.publishDateTime,
             publishDateTime: postCopy.publishDateTime,
             isApproved: postCopy.isApproved,
-            categoryId: parseInt(postCopy.categoryId),
+            // categoryId: parseInt(postCopy.categoryId),
+            categoryId: 1,
             userProfileId: parseInt(postCopy.userProfileId)
     })
     }
@@ -75,7 +76,7 @@ export const PostForm = () => {
             <FormGroup>
                 <Label for = "categoryId">Category</Label>
                 <select  name="categoryId" id="categoryId" onChange={handleInputChange}>
-                     <option value="0">Select a Category</option>{categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
+                     {/* <option value="0">Select a Category</option>{categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))} */}
                 </select>
             </FormGroup>
             <Button onClick={handleSave}>Submit</Button>
