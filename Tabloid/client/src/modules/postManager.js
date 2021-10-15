@@ -1,5 +1,6 @@
 import { getToken } from "./authManager";
 
+
 const baseUrl = '/api/post';
 
 export const getAllPosts = () => {
@@ -66,14 +67,14 @@ export const addPost = (post) => {
     }).catch((e) => {
       console.error("ERROR: ", e);
     }) 
-    
-    // .then((res) => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   } else {
-    //     throw new Error("An unknown error occurred while trying to add a post.");
-    //   }
-    // });
+    .then((res) => {
+      if (res.ok) {
+        console.log(res)
+        return res.json();
+      } else {
+        throw new Error("An unknown error occurred while trying to add a post.");
+      }
+    });
   });
 };
 

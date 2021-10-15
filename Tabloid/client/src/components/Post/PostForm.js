@@ -4,6 +4,8 @@ import { Input, Form, Label, Button } from "reactstrap";
 import { addPost } from "../../modules/postManager";
 import { FormGroup } from "reactstrap";
 // import { getAllCategories } from "../../modules/categoryManager";
+import { getPostById } from "../../modules/postManager.js";
+
 
 export const PostForm = () => {
     const [post, setPost] = useState({
@@ -14,12 +16,21 @@ export const PostForm = () => {
             publishDateTime: "",
             isApproved: true,
             categoryId: 0,
-            userProfileId: 2
+            
     })
+
+
+
+
+
     const [categories, setCategories] = useState([])
     useEffect(() => {
         // getAllCategories().then(setCategories)
     }, [])
+
+
+    var history = useHistory();
+
 
     const handleInputChange = (event) => {
         // This is needed because a form will always refresh your page when a button is clicked.
@@ -36,16 +47,20 @@ export const PostForm = () => {
             publishDateTime: postCopy.publishDateTime,
             isApproved: postCopy.isApproved,
             // categoryId: parseInt(postCopy.categoryId),
-            categoryId: 1,
-            userProfileId: parseInt(postCopy.userProfileId)
+            categoryId: 1
     })
     }
 
     const handleSave = (event) => {
         event.preventDefault()
-        addPost(post)
+        addPost(post).then(() => history.push(`/myPosts`))
     }
 
+    console.log("post id", post.id);
+
+    // .then((res) => {
+    //     if (res.ok) {
+    //       return res.json();
     return (
 
         <>

@@ -38,6 +38,9 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(Post post)
         {
+            string fireBaseId = GetCurrentUserProfileId();
+            var currentUser = _userProfileRepository.GetByFirebaseUserId(fireBaseId);
+            post.UserProfileId = currentUser.Id;
             post.CreateDateTime = DateTime.Now;
             _postRepository.AddPost(post);
             return CreatedAtAction("Get", new { id = post.Id }, post);
