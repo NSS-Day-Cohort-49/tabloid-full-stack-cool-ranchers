@@ -22,9 +22,11 @@ const PostDetail = () => {
   
   return (
     <ListGroup >
+      <h1>Post Details:</h1><br/>
       <ListGroupItem>
         <h3>{post.title}</h3>
         <p>{post.publishDateTime}</p>
+        {/* <p>{new Date().toLocaleDateString()}</p> */}
       </ListGroupItem>
       <ListGroupItem>
         <img src={post.imageLocation} />
@@ -38,7 +40,8 @@ const PostDetail = () => {
       <ListGroupItem>
         <p>{post.content}</p>
       </ListGroupItem>
-      <Button onClick={() => {history.push(`/post/${id}/comments`)}}>View Comments</Button>
+      <Button onClick={() => {history.push(`/post/${id}/comments`)}}>View Comments</Button><br/>
+      <Button onClick={() => {history.push(`/post/${id}/create`)}}>Add Comment</Button>
     </ListGroup>
   );
 };

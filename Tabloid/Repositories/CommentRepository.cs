@@ -105,5 +105,28 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
+        // Create a Comment on a Post:
+        public void CreateComment(Comment comment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Comment (PostId, UserProfileId, Subject, Content, CreateDateTime)
+                        OUTPUT INSERTED.ID VALUES (@postId, @userProfileId, @subject, @content, @createDateTime)";
+
+                    DbUtils.AddParameter(cmd, "@postId", comment.PostId);
+                    DbUtils.AddParameter(cmd, "@userProfileId", comment.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@subject", comment.Subject);
+                    DbUtils.AddParameter(cmd, "@content", comment.Content);
+                    DbUtils.AddParameter(cmd, "@createDateTime", comment.CreateDateTime);
+
+                    comment.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }
