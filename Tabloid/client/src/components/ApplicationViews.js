@@ -5,6 +5,7 @@ import Register from "./Register";
 import PostList from "./Post/PostList";
 import UserPostList from "./Post/UserPostList";
 import PostDetail from "./Post/PostDetail";
+import { PostForm } from "./Post/PostForm";
 import CommentList from "./Comment/CommentList";
 import CommentForm from "./Comment/CommentForm";
 import TagList from "./Tag/TagList";
@@ -28,8 +29,13 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/post">
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
+        </Route>
+          
         <Route path="/post/:id/comments">
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
+
         </Route>
 
         <Route path="/category">
