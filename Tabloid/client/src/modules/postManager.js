@@ -1,5 +1,6 @@
 import { getToken } from "./authManager";
 
+
 const baseUrl = '/api/post';
 
 export const getAllPosts = () => {
@@ -52,3 +53,29 @@ export const getPostById = (id) => {
     });
   });
 };
+
+export const addPost = (post) => {
+  console.log('post', post);
+  return getToken().then((token) => {
+    return fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(post)
+    }).catch((e) => {
+      console.error("ERROR: ", e);
+    }) 
+    .then((res) => {
+      if (res.ok) {
+        console.log(res)
+        return res.json();
+      } else {
+        throw new Error("An unknown error occurred while trying to add a post.");
+      }
+    });
+  });
+};
+
+
