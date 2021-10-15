@@ -37,3 +37,28 @@ export const getCommentsFromPost = (id) => {
     });
 };
 
+export const addComment = (comment) => {
+  console.log("comment object", comment);
+    return getToken().then((token) => {
+        return fetch(commentUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(comment),
+        }).then((res) => {
+          console.log('res', res);
+            if (res.ok) {
+                return res.json()
+            } else if (res.status === 401) {
+                throw new Error("Unauthorized")
+            } else {
+                throw new Error(
+                    `An unknown error occurred while trying to save a new comment.`
+                )
+            }
+        })
+    })
+}
+
