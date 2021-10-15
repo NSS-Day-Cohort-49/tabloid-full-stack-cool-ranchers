@@ -39,6 +39,26 @@ namespace Tabloid.Repositories
             }
         }
 
+        public void AddTag(Tag tag)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Tag ( Name )
+                        OUTPUT INSERTED.ID
+                        VALUES ( @Name )";
+                    DbUtils.AddParameter(cmd, "@Name", tag.Name);
+
+                    tag.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+
+
         private Tag NewTagFromReader(SqlDataReader reader)
         {
             return new Tag
