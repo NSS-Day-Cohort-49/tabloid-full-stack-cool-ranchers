@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Input, Form, Label, Button } from "reactstrap";
 import { addPost } from "../../modules/postManager";
 import { FormGroup } from "reactstrap";
-// import { getAllCategories } from "../../modules/categoryManager";
+import { getAllCategories } from "../../modules/categoryManager";
 import { getPostById } from "../../modules/postManager.js";
 
 
@@ -25,7 +25,7 @@ export const PostForm = () => {
 
     const [categories, setCategories] = useState([])
     useEffect(() => {
-        // getAllCategories().then(setCategories)
+        getAllCategories().then(setCategories)
     }, [])
 
 
@@ -46,7 +46,7 @@ export const PostForm = () => {
             imageLocation: postCopy.imageLocation,
             publishDateTime: postCopy.publishDateTime,
             isApproved: postCopy.isApproved,
-            // categoryId: parseInt(postCopy.categoryId),
+            categoryId: parseInt(postCopy.categoryId),
             categoryId: 1
     })
     }
@@ -91,7 +91,7 @@ export const PostForm = () => {
             <FormGroup>
                 <Label for = "categoryId">Category</Label>
                 <select  name="categoryId" id="categoryId" onChange={handleInputChange}>
-                     {/* <option value="0">Select a Category</option>{categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))} */}
+                     <option value="0">Select a Category</option>{categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
                 </select>
             </FormGroup>
             <Button onClick={handleSave}>Submit</Button>
