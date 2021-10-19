@@ -29,12 +29,40 @@ export default function Header({ isLoggedIn }) {
               </NavItem>
             }
           </Nav>
+          <Nav className="mr-auto" navbar>
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/myPosts">My Posts</NavLink>
+              </NavItem>
+            }
+          </Nav>
+          <Nav className="mr-auto" navbar>
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/category">Category Management</NavLink>
+              </NavItem>
+            }
+            <Nav className="mr-auto" navbar>
+              {isLoggedIn &&
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/tags">Tag MGMT</NavLink>
+                </NavItem>
+              }
+            </Nav>
+          </Nav>
+          <Nav className="mr-auto" navbar>
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/post">Add Post</NavLink>
+              </NavItem>
+            }
+          </Nav>
           <Nav navbar>
             {isLoggedIn &&
               <>
                 <NavItem>
-                  <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                  <button aria-current="page" className="nav-link"
+                    style={{ cursor: "pointer" }} onClick={logout}>Logout</button>
                 </NavItem>
               </>
             }
